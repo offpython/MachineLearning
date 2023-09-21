@@ -1,27 +1,34 @@
-# Means 자동으로 설정하기
+# Dataset 만들어주는 함수 만들기
 
 import numpy as np
 from numpy.random import normal
 import matplotlib.pyplot as plt
-
 np.random.seed(0)
 
-N_CLASSES, N_SAMPLES = 10, 100
-STD = 0.3
-MEANS = np.random.uniform(-5, 5, (N_CLASSES, 2))
+def make_dataset(n_classes=4, n_class_samples=100,
+                 std=0.5, means=None):
+    if means == None:
+        means = np.random.uniform(-5, 5, (n_classes, 2))
 
-X, y = [], []
-for class_idx in range(N_CLASSES):
-    mean = MEANS[class_idx]
-    X_class = normal(loc=mean, scale=STD,
-                     size=(N_SAMPLES, 2))
-    y_class = class_idx * np.ones(N_SAMPLES)
+    X, y = [], []
+    for class_idx in range(n_classes):
+        mean = means[class_idx]
 
-    X.append(X_class); y.append(y_class)
-X, y = np.vstack(X), np.concatenate(y)
+        X_class = normal(loc=mean, scale=std,
+                         size=(n_class_samples, 2))
+        y_class = class_idx * np.ones(n_class_samples)
+
+        X.append(X_class)
+        y.append(y_class)
+
+    X, y = np.vstack(X), np.concatenate(y)
+    return X, y
+
+n_classes = 10
+X, y = make_dataset(n_classes=n_classes)
 
 fig, ax = plt.subplots(figsize=(10, 10))
-for class_idx in range(N_CLASSES):
+for class_idx in range(n_classes):
     X_class = X[y == class_idx]
     ax.scatter(X_class[:, 0], X_class[:, 1],
                label=f"class {class_idx}",

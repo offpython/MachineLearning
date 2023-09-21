@@ -1,5 +1,3 @@
-# 반복연습
-
 import numpy as np
 from numpy.random import normal
 import matplotlib.pyplot as plt
@@ -23,4 +21,5 @@ ax.scatter(X_ones[:, 0], X_ones[:, 1], color='blue')
 ax.scatter(X_zeros[:, 0], X_zeros[:, 1], color='red')
 
 ax.axhline(y=0, color='gray'); ax.axvline(x=0, color='gray')
-ax.tick_params(labelsize=15); plt.show()
+ax.tick_params(labelsize=15)
+plt.show()

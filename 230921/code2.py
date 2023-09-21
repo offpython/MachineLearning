@@ -1,4 +1,5 @@
-# 데이터셋을 만들어주는 함수 구현
+# 데이터셋을 만들어주는 함수 구현 (복습)
+
 import numpy as np
 from numpy.random import normal
 from numpy.random import uniform

@@ -1,14 +1,14 @@
-# 연습5
+# Means 자동으로 설정하기
 
 import numpy as np
 from numpy.random import normal
 import matplotlib.pyplot as plt
 
-np.random.seed(20230919)
+np.random.seed(0)
 
-N_CLASSES, N_SAMPLES = 4, 100
+N_CLASSES, N_SAMPLES = 10, 100
 STD = 0.3
-MEANS = [[1, 1], [-1, -1], [-1, 1], [1, -1]]
+MEANS = np.random.uniform(-5, 5, (N_CLASSES, 2))
 
 X, y = [], []
 for class_idx in range(N_CLASSES):
@@ -24,7 +24,8 @@ fig, ax = plt.subplots(figsize=(10, 10))
 for class_idx in range(N_CLASSES):
     X_class = X[y == class_idx]
     ax.scatter(X_class[:, 0], X_class[:, 1],
-               label=f"class {class_idx}")
+               label=f"class {class_idx}",
+               alpha=0.5)
 
 ax.legend(fontsize=15)
 ax.axhline(y=0, color='gray')

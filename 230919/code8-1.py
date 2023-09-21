@@ -1,4 +1,4 @@
-# class 여러개일 때
+# 연습
 
 import numpy as np
 from numpy.random import normal
@@ -6,23 +6,24 @@ import matplotlib.pyplot as plt
 
 np.random.seed(230919)
 
-N_CLASSES, N_SAMPLES = 4, 100
+N_CLASS, N_SAMPLES = 4, 100
 STD = 0.3
-MEANS = [[1, 1], [-1, -1], [-1, 1], [1, -1]]
+MEANS = [[1,1], [-1,-1], [-1,1], [1,-1]]
 
 X, y = [], []
-for class_idx in range(N_CLASSES):
+for class_idx in range(N_CLASS):
     mean = MEANS[class_idx]
     X_class = normal(loc=mean, scale=STD, size=(N_SAMPLES, 2))
     y_class = class_idx * np.ones(N_SAMPLES)
-    # print(y_class, '\n')
+
     X.append(X_class); y.append(y_class)
 
 X, y = np.vstack(X), np.concatenate(y)
 
+##시각화
 fig, ax = plt.subplots(figsize=(10, 10))
-for class_idx in range(N_CLASSES):
-    X_class = X[y == class_idx]
+for class_idx in range(N_CLASS):
+    X_class = X[y==class_idx]
     ax.scatter(X_class[:, 0], X_class[:, 1],
                label=f'class {class_idx}')
 
