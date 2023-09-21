@@ -14,6 +14,3 @@ print(A[:, 0].shape)
 print(A[:, 1].shape)
 print(A[:, 2].shape)
 print(A[:, 3].shape, '\n')
-
-
-
