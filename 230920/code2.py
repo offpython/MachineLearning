@@ -1,32 +1,15 @@
-# Dataset, Test data, 준비하기
+# Sort와 Argsort
 
 import numpy as np
-import matplotlib.pyplot as plt
-from dataset_utils import make_dataset, vis_dataset
-
 np.random.seed(0)
 
-n_classes = 3
-X, y = make_dataset(n_classes=n_classes)
-print(X.shape)
-test_data = np.array([-2, -0.5])
+data=np.random.randint(0, 100, (10,))
+print(data, '\n')
 
-# Test_data와 dataset 안에 있는 모든 데이터 사이의 거리
-K = 5
-dists = []
-for X_ in X:
-    dist = np.sqrt(np.sum((test_data - X_)**2))
-    dists.append(dist)
-
-sorted_indices = np.argsort(dists)
-closest_indices = sorted_indices[:K] # 가까운 K개 데이터의 인덱스
-closest_classes = y[closest_indices] # 가까운 데이터들의 클래스
-
-print(sorted_indices)
-print(closest_classes)
+# np.sort는 작은 값부터 정렬
+# np.argsort는 작은 값부터 큰 값까지의 인덱스
+print(np.sort(data),'\n')
+print(np.argsort(data), '\n')
 
 
-# fig, ax = vis_dataset(X, y)
-# ax.scatter(test_data[0], test_data[1], color='red', s=100)
-# plt.show()
-
+## 거리가 얼마나 가까운게 중요한게 아니라, 가까운 지점의 인덱스가 어딘지를 알아내야함 => argsort로 인덱스 찾기

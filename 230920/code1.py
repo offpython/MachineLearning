@@ -10,8 +10,9 @@ y = np.random.randint(-5, 6, (dimension,))
 print(f"x: {x}")
 print(f"x: {y}\n")
 
-euclidean_dist = np.sqrt(np.sum((x-y)**2))  #L2 distance
-manhattan_dist = np.sum(np.abs((x-y)))      #L1 distance = Taxicab distnace
+# 공식
+euclidean_dist = np.sqrt(np.sum((x-y)**2))  # L2 distance
+manhattan_dist = np.sum(np.abs((x-y)))      # L1 distance = Taxicab distnace
 
 
 # 1. euclidean 설명
