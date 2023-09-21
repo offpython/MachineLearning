@@ -1,4 +1,4 @@
-# Dataset 만들어주는 함수 만들기
+# make_dataset  : dataset 만들어주는 함수 만들기
 
 import numpy as np
 from numpy.random import normal
