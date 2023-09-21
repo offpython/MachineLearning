@@ -1,5 +1,4 @@
-# Numpy의 행렬에서 행, 열을 가져올 때 주의점 -> 백터형식으로 가져옴
-import numpy as np
+# Numpy의 행렬에서 행, 열을 가져올 때 주의점 -> 백터의 형태로 가져옴
 
 A = np.arange(12).reshape(3, 4)
 print(f'A: {A.shape}\n{A}\n')
