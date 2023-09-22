@@ -1,11 +1,12 @@
-# Step.2 For loop 모두 없애기
+# Step.2 For loop 연산 바꾸기
+# vectorize = For loop 연산을 제거하는 효율적인 방법임 -> 시간 단축 up
 
 from time import time
 import numpy as np
 from numpy.random import randint
 
 # (a,) shape
-train_ds = randint(0, 10, (6000, 5))
+train_ds = randint(0, 10, (6000, 5))    
 test_ds = randint(0, 10, (1000, 5))
 
 start_time = time()
@@ -19,7 +20,7 @@ print(f"{elapsed_time1 = }")
 
 start_time = time()
 for test_sample in test_ds:
-    dists = np.sum((test_sample - train_ds)**2, axis=1)
+    dists = np.sum((test_sample - train_ds)**2, axis=1)     # -> for 문 대체, 시간 단축
     # test_sample: (5,)
     # train_ds: (6000, 5)
 

@@ -1,6 +1,5 @@
 # Step.1 모든 x-y 구하기
 
-
 import numpy as np
 
 data1 = np.arange(5)
