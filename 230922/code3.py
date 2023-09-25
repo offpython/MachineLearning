@@ -6,7 +6,7 @@ import numpy as np
 from numpy.random import randint
 
 # (a,) shape
-train_ds = randint(0, 10, (6000, 5))    
+train_ds = randint(0, 10, (6000, 5))
 test_ds = randint(0, 10, (1000, 5))
 
 start_time = time()
