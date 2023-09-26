@@ -1,48 +1,34 @@
-# Inter-cluster Distance를 측정해서 학습하는 전체 코드
-
 import numpy as np
 import matplotlib.pyplot as plt
 
-from dataset_utils import make_dataset
-from utils import cal_inter_cluster_dist
+from dataset_utils import make_dataset, vis_dataset
+from dataset_utils import get_db_X
 
-K = 4
-X = make_dataset(std=0.4)
-n_samples = X.shape[0]
+K = 5
+N_CLASSES = 4
+X, y = make_dataset(n_classes=N_CLASSES)
 
-random_indices = np.arange(400)
-np.random.shuffle(random_indices)
-random_indices = random_indices[:K]
-centroids = X[random_indices]
+fig, ax = vis_dataset(X, y)
 
-inter_cluster_dists = [cal_inter_cluster_dist(centroids)]
-X_ = X.reshape(n_samples, 1, 2)
+db_X = get_db_X(ax)
 
-fig, axes = plt.subplots(2, 3, figsize=(15, 10)) ###
-axes = axes.flatten() ###
-axes[0].scatter(X[:, 0], X[:, 1]) ###
-for step in range(5):
-    centroids_ = centroids.reshape(1, K, 2)
+db_y = []
+for X_ in db_X:
+    dists = np.sum((X - X_) ** 2, axis=1)
 
-    dists = np.sum((X_ - centroids_) ** 2, axis=2)
-    clustering_indices = np.argmin(dists, axis=1)
+    sorted_indices = np.argsort(dists)
+    closest_indices = sorted_indices[:K]
+    closest_classes = y[closest_indices]
 
-    clustering_dict = {}
-    for k in range(K):
-        cluster_X = X[clustering_indices == k]
-        clustering_dict[k] = cluster_X
+    uniques, cnts = np.unique(closest_classes,
+                              return_counts=True)
+    pred = uniques[np.argmax(cnts)]
+    db_y.append(pred)
+db_y = np.array(db_y)
 
-        axes[step + 1].scatter(cluster_X[:, 0], cluster_X[:, 1]) ###
+for class_idx in range(N_CLASSES):
+    class_X = db_X[db_y == class_idx]
+    ax.scatter(class_X[:, 0], class_X[:, 1],
+               color=f"C{class_idx}", alpha=0.1)
 
-    centroids = []
-    for k in range(K):
-        centroid = np.mean(clustering_dict[k], axis=0)
-        centroids.append(centroid)
-    centroids = np.concatenate(centroids).reshape(K, 2)
-
-    inter_cluster_dists.append(cal_inter_cluster_dist(centroids))
-
-plt.show()
-fig, ax = plt.subplots(figsize=(10, 4))
-ax.plot(inter_cluster_dists)
 plt.show()
