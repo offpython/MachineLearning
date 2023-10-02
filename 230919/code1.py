@@ -1,6 +1,5 @@
 # np.linspace
 import numpy as np
-
 # 0부터 20까지 5개의 숫자
 print(np.linspace(0, 20, 5))
 # 0부터 100까지 4개의 숫자
