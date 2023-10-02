@@ -13,3 +13,4 @@ X, y = make_dataset(n_classes=n_classes)
 print(y) # y값 shuffing된 거 확인
 fig, ax = vis_dataset(X, y)
 plt.show()
+
